@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import "./App.css";
+import HomePage from "./Pages/HomePage";
+import { Route, Routes } from "react-router";
+import ProductDetails from "./Pages/ProductDetails";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
+import AboutUs from "./Pages/AboutUs";
+import Contact from "./Pages/Contact";
+import Help from "./Pages/Help";
+// import Menu from "./Pages/Menu";
+import ProductList from "./Pages/ProductList";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [cartCount, setCartCount] = useState<number>(0);
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div
+      style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+    >
+      <Header cartCount={cartCount} />
+      <main style={{ padding: 20, flex: 1 }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/Product/:id" element={<ProductDetails />} />
+          <Route path="/ProductList" element={<ProductList />} />
+          {/* <Route path="/ProductList" element={<Menu />} /> */}
+          <Route path="/AboutUs" element={<AboutUs />} />
+          <Route path="/Contact" element={<Contact />} />
+          <Route path="/Help" element={<Help />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;
